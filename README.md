@@ -12,7 +12,7 @@ Open http://localhost:8080. The built HTML also works directly from disk.
 ## Content
 
 `content/recovered-dev-logs.txt` preserves the retrieved source conversation text.
-Entries 001–004 were recovered in full. Entry 005 was truncated by retrieval and is visibly labeled a draft excerpt. Obtain the original ending before treating it as a complete published log.
+Entries 001–004 use the recovered source text. Entry 005 uses the complete owner-supplied text in `content/dev-log-005.md`.
 Edit page copy and metadata in `build.py`, styles in `site/assets/style.css`, and navigation behavior in `site/assets/app.js`. Rebuild after editing content.
 
 Discord currently uses the supplied temporary invite `https://discord.gg/mByxc7QGq`. Replace it in `build.py` and rebuild when it expires; preferably use a permanent invite when available. No exact expiry date has been assumed.

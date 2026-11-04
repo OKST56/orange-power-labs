@@ -17,7 +17,7 @@ titles=['The Beginning of College Baseball Legacy','Recompiling an Entire Baseba
 dates=['October 16–23, 2026','October 24–26, 2026','October 26–29, 2026','October 29 – November 2, 2026','November 2–3, 2026']
 summaries=['The vision, the tools, and the first native Windows build.','15,768 function entry points. 129 generated C++ files. A major step toward Windows.','Tracing an animation stall back to memory allocation—and restoring 7,083 clips.','Command buffers, synchronization, and the path to visible progress.','A correctly rendered title screen and the first steps into a partially rendered main menu.']
 def rows(indices):
-    return '<div class="log-list">'+''.join(f'<a class="log-row" href="dev-log-{i+1:03}.html"><span class="log-number">{i+1:03}</span><div><p class="eyebrow">{dates[i]}'+(' · DRAFT EXCERPT' if i==4 else '')+f'</p><h3>{titles[i]}</h3><p>{summaries[i]}</p></div><span class="arrow">↗</span></a>' for i in indices)+'</div>'
+    return '<div class="log-list">'+''.join(f'<a class="log-row" href="dev-log-{i+1:03}.html"><span class="log-number">{i+1:03}</span><div><p class="eyebrow">{dates[i]}</p><h3>{titles[i]}</h3><p>{summaries[i]}</p></div><span class="arrow">↗</span></a>' for i in indices)+'</div>'
 
 page('index.html','Home','''<section class="hero"><div class="hero-copy"><p class="eyebrow"><span class="dot"></span> ORANGE POWER LABS / INDEPENDENT DEVELOPMENT</p><h1>Classic games.<br>New possibilities.<br><em>All heart.</em></h1><p class="lead">Bringing classic sports games into a new era. Native recompilation, ambitious mods, and the future of college sports gaming.</p><div class="actions"><a class="button" href="projects.html">Explore our projects ↗</a><a class="secondary" href="dev-logs.html">Read the dev logs →</a></div></div><div class="hero-art"><div class="orbit"></div><img src="assets/logo.png" alt="Orange Power Labs orange OP lightning bolt and cowboy hat logo"><p>BUILT WITH GRIT.<br><b>POWERED BY POSSIBILITY.</b></p></div></section><div class="ticker"><span>INDEPENDENT DEVELOPMENT</span><b>✳</b><span>SPORTS GAMING</span><b>✳</b><span>REWRITING WHAT’S POSSIBLE</span><b>✳</b></div><section><div class="section-heading"><div><p class="eyebrow">THE WORK</p><h2>Big ideas. Real progress.</h2></div><a href="projects.html">All projects ↗</a></div>'''+cards()+'''</section><section><div class="section-heading"><div><p class="eyebrow">FROM THE LAB</p><h2>Every breakthrough has a story.</h2></div><a href="dev-logs.html">All dev logs ↗</a></div>'''+rows([4,3,2])+'''</section><section class="community-banner"><p class="eyebrow">PULL UP A CHAIR</p><h2>Follow the build.<br>Be part of what comes next.</h2><p>Join the community for project discussion and a closer look at the journey.</p><a class="button" href="community.html">Find the community ↗</a></section>''')
 page('projects.html','Projects',intro('THE WORK','Projects with a purpose.','Reimagining the sports games we love, one milestone at a time.')+'<section>'+cards()+'</section>')
@@ -50,10 +50,8 @@ def markdown(s):
     return ''.join(result)
 raw=(ROOT/'content/recovered-dev-logs.txt').read_text(encoding='utf-8')
 blocks=re.findall(r':::writing[^\n]*\n(.*?)(?=\n:::|\Z)',raw,re.S)
+blocks[4]=(ROOT/'content/dev-log-005.md').read_text(encoding='utf-8')
 for i,block in enumerate(blocks):
-    if i==4:
-        # The source retrieval stops mid-sentence: retain only complete recovered paragraphs.
-        block=block.rsplit('\n\n',1)[0]
     body=markdown(block)
     figures={
         0: '<figure class="dev-image"><img src="assets/mlb-the-show-16-ortiz.png" alt="David Ortiz batting for Boston in MLB The Show 16, with a Baltimore catcher behind home plate"><figcaption>MLB The Show 16 — David Ortiz. Reference imagery from the original game. Image: Sony / San Diego Studio, via <a href="https://www.gamespot.com/wp-content/uploads/original/536/5360430/3009525-ortiz.jpg">GameSpot</a>.</figcaption></figure>',
@@ -63,7 +61,7 @@ for i,block in enumerate(blocks):
         # Insert the image beneath the existing title and date; preserve all original prose.
         position=body.find('</p>')+4
         body=body[:position]+figures[i]+body[position:]
-    warning='<div class="notice"><strong>Draft excerpt</strong><p>The source conversation was truncated. This entry includes only the recovered text; its original ending is pending review.</p></div>' if i==4 else ''
+    warning=''
     page(f'dev-log-{i+1:03}.html',f'Dev Log {i+1:03} — {titles[i]}',f'<section class="article"><a class="back" href="dev-logs.html">← All dev logs</a><p class="eyebrow">FROM THE LAB / {i+1:03}</p>{warning}<article>{body}</article><div class="article-nav">'+(f'<a href="dev-log-{i:03}.html">← Previous entry</a>' if i else '<span></span>')+(f'<a href="dev-log-{i+2:03}.html">Next entry →</a>' if i<4 else '<a href="community.html">Join the conversation ↗</a>')+'</div></section>','Dev Logs')
 page('media.html','Media',intro('A LOOK INSIDE','The work, in focus.','A home for development captures, screenshots, and videos.')+'''<section class="empty"><span class="large-number">REC / 001</span><h2>Our first visual milestone.</h2><p>The native title screen is documented in Dev Log 005. Verified development screenshots and videos will appear here when they are ready to share.</p><a class="button" href="dev-log-005.html">Read the milestone →</a></section>''')
 page('downloads.html','Downloads',intro('WHEN IT’S READY','Good things<br>take development.','Future public releases and project tools will live here.')+'''<section class="empty"><span class="status muted">● No public releases yet</span><h2>Still in the lab.</h2><p>College Baseball Legacy is working toward a functional native runtime. Missouri High School Football is in research and development. Neither project has a public download or an announced release date.</p><a class="button" href="dev-logs.html">See the latest progress →</a></section>''')
