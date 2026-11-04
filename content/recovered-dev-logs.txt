@@ -1,0 +1,474 @@
+# College Baseball Legacy
+
+OFFICIAL DEVELOPMENT JOURNAL · OCTOBER 16 – NOVEMBER 3, 2026
+
+image_group{"query":["MLB The Show 16 PlayStation 3 baseball video game stadium gameplay screenshot"],"aspect_ratio":"16:9","layout":"carousel","num_per_query":1}
+
+**Five development logs documenting the journey from a brand-new Windows development environment to the first correctly rendered native MLB The Show 16 title screen.**
+
+These updates are written for the Orange Power Labs community, combining the excitement of major breakthroughs with enough engineering detail to show what's happening behind the scenes.
+
+The chronology draws on our College Baseball Legacy discussions and recovered technical documentation. Where a milestone's exact completion date isn't established, I've used a date range rather than assigning an unsupported day.
+
+---
+
+DEVELOPMENT LOG \#001 · OCTOBER 16–23, 2026
+
+# The Beginning of College Baseball Legacy
+
+Building the foundation for a native PC baseball game
+
+:::writing{variant="document" id="63101"}
+# College Baseball Legacy — Dev Log #001
+**October 16–23, 2026 | Project Foundation**
+
+Every great project starts somewhere. For College Baseball Legacy, it started with a simple question:
+
+*What if we could bring the gameplay of MLB The Show to college baseball on PC?*
+
+College Baseball Legacy (CBL) is an ambitious project being developed under Orange Power Labs. Our ultimate goal is to create a fully featured college baseball experience using the foundation of MLB The Show 16, originally released for PlayStation 3.
+
+But before we can begin replacing MLB teams with college programs, building NCAA conferences, or implementing the Road to Omaha, we have to solve a much bigger challenge.
+
+**We need to get the original game running natively on Windows.**
+
+### Why MLB The Show 16?
+
+After evaluating several baseball games and their potential for extensive modding, we selected MLB The Show 16 for PS3.
+
+The game provides a sophisticated baseball simulation engine, a substantial collection of professional and minor-league teams, and a strong gameplay foundation.
+
+Our long-term plan is to transform that foundation into a college baseball experience with NCAA teams, conferences, schedules, rankings, postseason tournaments, and eventually much more.
+
+### The Recompilation Approach
+
+Rather than relying on a traditional PlayStation 3 emulator, we're pursuing a technique known as **static recompilation**.
+
+In simplified terms, recompilation translates the original game's machine instructions into code that can be compiled and executed on a different platform.
+
+We're using the open-source **ps3recomp** framework as the foundation of this process.
+
+The objective is to produce a native Windows executable while rebuilding the supporting systems that the original game expects from PS3 hardware and software.
+
+This isn't simply changing a few files or creating a texture mod. It involves understanding and adapting the game's execution environment.
+
+### Building Our Development Environment
+
+During our first phase, we established the project's technical foundation:
+
+- Configured Visual Studio, CMake, Ninja, Python, Git, and Windows development tools.
+- Created our local development workspace and project directory structure.
+- Initialized Git version control.
+- Successfully compiled and executed a native Windows C++ test application.
+- Obtained and began inspecting the ps3recomp framework.
+- Established a workflow using AI-assisted development tools, including Codex and Claude Code.
+
+That first successful native build was modest, but important. It confirmed that our Windows compilation toolchain was operational.
+
+### Looking Ahead
+
+Our immediate priority is not college baseball customization.
+
+It's proving that the original game's code can be translated, compiled, linked, and eventually executed correctly on Windows.
+
+Once that foundation is reliable, we'll be in a much stronger position to begin transforming MLB The Show 16 into College Baseball Legacy.
+
+**The project is officially underway.**
+
+*— Orange Power Labs Development Team*
+:::
+
+---
+
+DEVELOPMENT LOG \#002 · OCTOBER 24–26, 2026
+
+# Recompiling an Entire Baseball Game
+
+From PS3 executable analysis to millions of lines of generated code
+
+# 15,768
+
+PPU function starts
+
+# 129
+
+Generated C++ files
+
+# 6.43M
+
+Lines of generated code
+
+Recorded results from the official executable analysis and translation pipeline.
+
+:::writing{variant="document" id="63102"}
+# College Baseball Legacy — Dev Log #002
+**October 24–26, 2026 | The Recompilation Breakthrough**
+
+This week, College Baseball Legacy took a major step forward.
+
+We moved beyond setting up development tools and began tackling one of the most challenging parts of the entire project: translating the original PlayStation 3 game's executable into code that can be compiled for Windows.
+
+And the scale of this work is enormous.
+
+### Understanding the Original Game
+
+The PlayStation 3 uses a processor architecture fundamentally different from modern Windows PCs.
+
+MLB The Show 16 was designed to execute PowerPC instructions on the PS3's Cell processor. Our Windows target uses x86-64 processors.
+
+Those instruction sets aren't directly interchangeable.
+
+To bridge that gap, we're using ps3recomp to analyze the original executable and generate equivalent C++ code.
+
+### Milestone: Identifying the Game's Functions
+
+On October 24, our official executable analysis completed an important milestone known as **Step 134**.
+
+The analysis identified:
+
+- **15,768 unique PPU function entry points**
+- **433 unique imported function identifiers**
+- **32 imported libraries**
+
+PPU stands for *Power Processing Unit*, the PS3's main general-purpose processor.
+
+These results gave us a substantial map of the game's executable code and its dependencies on PlayStation system functionality.
+
+### Solving Function Boundary Problems
+
+One of the challenges involved identifying where functions begin and end.
+
+During Step 135A, we discovered that some apparent function entry points were actually internal jump-table targets.
+
+If handled incorrectly, these could cause the translation system to generate overlapping or excessively large functions.
+
+We identified 88 internal jump-table targets and six problematic function extents.
+
+This mattered because inaccurate function boundaries can produce incorrect translated code or dramatically increase compilation complexity.
+
+The following translation work incorporated these findings.
+
+### Milestone: The Full Official Translation
+
+Step 135B successfully generated a massive body of C++ source code.
+
+The resulting output contained approximately:
+
+- **43,471 generated function definitions and fragments**
+- **129 C++ translation units**
+- **6,426,955 lines of generated source code**
+
+These numbers represent generated implementation artifacts, not tens of thousands of independently verified gameplay functions.
+
+Nevertheless, this was a significant engineering achievement.
+
+Instead of dealing with a small experimental portion of the executable, we now had a substantial translated codebase that could be compiled as part of a native Windows application.
+
+### From Generated Code to a Windows Executable
+
+The next phase involved compiling the generated source, linking it with the ps3recomp runtime, and resolving the interfaces between the original game and its new Windows environment.
+
+The runtime must provide replacements for many services the game previously obtained from the PS3 operating system.
+
+This includes memory management, file access, threading, synchronization, and graphics-related functionality.
+
+By this stage, we had progressed into native linking and runtime execution work.
+
+### Why This Matters
+
+We've taken an important step toward answering the project's first major technical question:
+
+*Can the original game's executable be translated into a native Windows application?*
+
+The results are encouraging.
+
+But successful translation and compilation do not automatically mean that a game will run correctly.
+
+We still have to reproduce enough of the PS3 environment for the translated game to function.
+
+**The code is coming together. Now we have to bring it to life.**
+
+*— Orange Power Labs Development Team*
+:::
+
+---
+
+DEVELOPMENT LOG \#003 · OCTOBER 26–29, 2026
+
+# Bringing the Game Engine to Life
+
+Memory, animation, synchronization, and the challenges of rebuilding a PS3 runtime
+
+:::writing{variant="document" id="63103"}
+# College Baseball Legacy — Dev Log #003
+**October 26–29, 2026 | Native Runtime Development**
+
+The College Baseball Legacy project has entered one of its most technically demanding stages.
+
+We've translated an enormous amount of the original game's executable code, but that code still expects to be running on a PlayStation 3.
+
+And Windows is definitely not a PlayStation 3.
+
+This development phase has focused on bridging that gap.
+
+### Recreating the PlayStation Environment
+
+The original game relies on system services provided by the PS3 operating system.
+
+These services handle everything from allocating memory to coordinating threads and processing graphics commands.
+
+Our native Windows version needs compatible implementations of these services.
+
+This compatibility layer is commonly called a **runtime**.
+
+One of our biggest challenges is ensuring that the translated game interacts with this runtime in the same way it interacted with the original console.
+
+### The Animation Problem
+
+During testing, we encountered a particularly interesting problem involving the game's animation system.
+
+The game was becoming stuck in a repeated execution pattern associated with a catcher animation sequence.
+
+Initially, the symptoms suggested that the animation itself might be malfunctioning.
+
+But further investigation uncovered a deeper problem.
+
+The game was attempting to use animation data that had not been correctly initialized.
+
+Why?
+
+Because the memory allocation system wasn't behaving as the original game expected.
+
+### Finding the Actual Cause
+
+Our investigation traced the issue through several connected systems:
+
+1. The game's animation system required memory for its animation data.
+2. The memory allocation process was failing to provide the expected resources.
+3. A memory-container syscall had incorrect argument handling, and another required allocation syscall was missing.
+4. The resulting animation bank was empty.
+5. Animation duration lookups returned zero, contributing to the apparent execution stall.
+
+This is a perfect example of why native recompilation is so challenging.
+
+A visible problem in one system can originate from an entirely different subsystem.
+
+### Milestone: Restoring Animation Data
+
+After correcting the relevant memory behavior, testing showed that the game's animation bank was being populated.
+
+The runtime reported **7,083 animation clips**.
+
+A previously failing animation-duration lookup returned approximately **4.433 seconds** instead of zero.
+
+The earlier catcher-related repeated-execution signature was no longer observed in that test.
+
+That doesn't mean every animation is working perfectly, but it demonstrates that an important underlying system is now functioning substantially better.
+
+### SPU and Graphics Runtime Work
+
+We have also been investigating and adapting additional PS3 systems.
+
+These include:
+
+- **SPU execution:** Supporting workloads associated with the Cell processor's specialized processing units.
+- **Interrupt delivery:** Allowing certain processing events to notify other parts of the runtime.
+- **Graphics callbacks:** Handling communication between game code and the graphics system.
+- **Thread synchronization:** Coordinating different execution threads and their dependencies.
+
+These systems are tightly connected.
+
+A problem in any one of them can prevent the game from progressing, even when the translated code itself is correct.
+
+### An Independent Engineering Review
+
+On October 28, we also conducted a substantial read-only review of our recompilation architecture and development progress.
+
+The review confirmed that we had substantially adopted ps3recomp's intended translation and runtime architecture.
+
+It also identified opportunities to improve our testing process, particularly by checking system-level behavior before repeatedly launching the entire game.
+
+This review helped establish a more disciplined approach to future development.
+
+### Where We Stand
+
+Our native executable is no longer just an abstract collection of translated instructions.
+
+We're observing meaningful interactions with the game's original systems, identifying runtime failures, and resolving them.
+
+There are still significant obstacles ahead, particularly around synchronization and graphics.
+
+But we're making progress toward something that seemed extremely distant when we started:
+
+**Getting MLB The Show 16 to actually run on Windows without a traditional PS3 emulator.**
+
+*— Orange Power Labs Development Team*
+:::
+
+---
+
+DEVELOPMENT LOG \#004 · OCTOBER 29 – NOVEMBER 2, 2026
+
+# Breaking Through the Graphics Barrier
+
+Getting the original PS3 rendering pipeline to communicate with Windows
+
+:::writing{variant="document" id="63104"}
+# College Baseball Legacy — Dev Log #004
+**October 29 – November 2, 2026 | Graphics and Execution Breakthroughs**
+
+We've reached a particularly exciting stage of College Baseball Legacy development.
+
+Our focus has shifted from simply getting the original game code to execute toward making that execution produce something visible.
+
+And that introduces an entirely new set of challenges.
+
+### The Graphics Problem
+
+MLB The Show 16 was designed around the PlayStation 3's RSX graphics processor.
+
+Modern Windows PCs use completely different graphics hardware and software interfaces.
+
+This means our native recompilation needs a way to translate the game's graphics-related behavior into operations that can be handled by a modern PC graphics backend.
+
+That includes managing graphics memory, processing command buffers, handling synchronization, and reproducing the expected rendering behavior.
+
+### Understanding Command Buffers
+
+One of the important concepts in this phase is the graphics command buffer.
+
+Think of it as a sequence of instructions prepared by the game for the graphics processor.
+
+Those instructions tell the graphics system what work needs to happen.
+
+If the command buffer is interpreted incorrectly, or if the game and graphics system disagree about its state, execution can stall or rendering can fail.
+
+This is especially difficult when recreating behavior originally designed for specialized console hardware.
+
+### Milestone M55: Graphics Command-Buffer Progress
+
+During this phase, milestone M55 confirmed a correction involving graphics command-buffer handling.
+
+This was an important step because it addressed a concrete problem in how the runtime processed graphics-related activity.
+
+However, fixing that issue did not immediately produce a fully functioning game.
+
+A separate execution stall remained.
+
+That's been a recurring theme throughout development: solving one problem often reveals the next dependency.
+
+### Graphics Configuration and Startup Behavior
+
+As we continued investigating the rendering pipeline, we encountered additional issues involving graphics configuration and startup behavior.
+
+The original game also contains startup interactions related to display capabilities, including a prompt about using a 3D-capable display.
+
+These are examples of console-specific behaviors that must be understood when bringing the game to Windows.
+
+We have been working to distinguish genuine graphics failures from startup prompts, synchronization issues, and other conditions that can prevent the game from advancing.
+
+### The Importance of Controlled Testing
+
+Rather than making broad changes and hoping the game works, our development process has increasingly relied on bounded experiments.
+
+These experiments help us answer specific questions:
+
+- Did the game advance beyond the previous execution point?
+- Did the graphics system process the expected commands?
+- Did a change resolve the original problem or simply move the stall?
+- Can we reproduce the result across independent launches?
+
+This approach helps preserve working functionality while we investigate new problems.
+
+### Approaching a Major Milestone
+
+The results of this work have brought us closer to our first major visual breakthrough.
+
+Our goal is no longer simply to prove that the native executable launches.
+
+We want to see the game's actual graphics rendered correctly on Windows.
+
+And for the first time, that goal is beginning to look achievable.
+
+**We're getting closer to seeing MLB The Show 16 come to life on PC.**
+
+*— Orange Power Labs Development Team*
+:::
+
+---
+
+DEVELOPMENT LOG \#005 · NOVEMBER 2–3, 2026
+
+# We Have a Title Screen\!
+
+Our first major visual breakthrough — and the first steps into the game's main menu
+
+image_group{"query":["MLB The Show 16 PS3 original title screen press start baseball game"],"aspect_ratio":"16:9","layout":"carousel","num_per_query":1}
+
+Reference imagery from the original game, not a screenshot of the native Windows build.
+
+:::writing{variant="document" id="63105"}
+# College Baseball Legacy — Dev Log #005
+**November 2–3, 2026 | Our First Correctly Rendered Title Screen!**
+
+**WE HAVE A TITLE SCREEN!**
+
+After weeks of translating code, building a Windows runtime, debugging memory systems, investigating synchronization problems, and working through graphics issues, we've reached one of the most exciting milestones in College Baseball Legacy development.
+
+**MLB The Show 16's original title screen has successfully rendered in our native Windows build!**
+
+This is a huge moment for the project.
+
+### From Millions of Lines of Code to Something Visible
+
+When we began this journey on October 16, our development environment was little more than a collection of tools and an ambitious plan.
+
+Since then, we've generated millions of lines of translated code, compiled a native Windows executable, and worked through an enormous number of technical challenges.
+
+Until now, much of our progress has been visible primarily through debugging logs, memory traces, and execution results.
+
+Those are important engineering achievements, but they're not quite the same as seeing the game itself.
+
+Now, for the first time, we have a correctly rendered title screen.
+
+That is an entirely different kind of milestone.
+
+### Why This Is Important
+
+A title screen might seem like a small accomplishment compared with playing an entire baseball game.
+
+But consider what has to happen for that screen to appear.
+
+The native executable must initialize enough of the game's systems to begin running.
+
+The translated game code must interact with our Windows runtime.
+
+Required game resources must be accessible.
+
+The graphics system must process enough of the original rendering workload to produce the intended image.
+
+And all of those systems must cooperate well enough to reach the title screen.
+
+It doesn't prove that every subsystem works, but it demonstrates meaningful end-to-end progress.
+
+### Milestone M107: Advancing Beyond the Title Screen
+
+We didn't stop at simply displaying the title screen.
+
+Our next objective was to determine whether the native game could advance beyond the START prompt and enter the main menu.
+
+For this milestone, we allowed Claude Code to navigate the startup sequence autonomously.
+
+This meant the development agent handled the navigation and testing process rather than requiring us to manually interact with the game.
+
+The experiment was deliberately limited to six game launches.
+
+And the results were encouraging.
+
+**The game successfully advanced beyond the START prompt and reached the main menu!**
+
+However, the menu did not render completely.
+
+Some portions appeared correctly, while others remained missing or incomplete.
+
+This tells us that we've made further progress through the game's startup sequence, but that additio
