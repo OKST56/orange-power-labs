@@ -6,3 +6,7 @@
 
 /* Gunmetal panels with orange and jersey-inspired turquoise details. */
 .empty{border-top:2px solid var(--turquoise)}.football:hover{border-color:var(--turquoise)}.football .text-link{color:#69cdd2}
+
+/* Independent project journals; retain the studio palette and field motifs. */
+.project-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.project-copy{padding:26px}.project-copy h3{font-size:36px}.project-subtitle{color:var(--orange);font-size:13px!important}.xbox{background:linear-gradient(145deg,#3b3e40,#292c2f)}.xbox .yard-lines{background:repeating-linear-gradient(0deg,transparent 0 64px,#ff983e44 64px 66px)}.journal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.journal-card{padding:26px;background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--turquoise)}.journal-card:hover{border-color:var(--orange)}.journal-card h3{font-size:30px}.journal-card p{font-size:15px}.journal-card .eyebrow{font-size:10px}.pipeline{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0}.pipeline span{border:1px solid var(--line);padding:10px 16px;background:var(--panel);font-size:14px}.project-announcements{border-top:1px solid var(--line)}@media(max-width:1050px){.project-grid,.journal-grid{grid-template-columns:1fr}.project{min-height:360px}.project-copy{padding:32px}.project-copy h3{font-size:43px}}
+

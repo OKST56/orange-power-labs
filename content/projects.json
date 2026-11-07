@@ -1,0 +1,23 @@
+[
+  {
+    "id": "college-baseball-legacy",
+    "name": "MLB The Show 16 Recomp / College Baseball Legacy",
+    "platform": "PS3 → Native Windows",
+    "journal": "college-baseball-legacy-dev-logs.html",
+    "journal_summary": "Six published logs. Recompilation, runtime breakthroughs, and the CBL identity."
+  },
+  {
+    "id": "missouri-high-school-football",
+    "name": "Missouri High School Football Mod",
+    "platform": "NCAA Football 14 / PS3",
+    "journal": "missouri-high-school-football-dev-logs.html",
+    "journal_summary": "A dedicated series for NCAA 14 modding, with independent numbering starting at #001."
+  },
+  {
+    "id": "ncaa-football-07",
+    "name": "NCAA Football 07 Recomp",
+    "platform": "Original Xbox → Native Windows",
+    "journal": "ncaa-football-07-dev-logs.html",
+    "journal_summary": "A new journal for a childhood favorite. Opening articles are in preparation."
+  }
+]
