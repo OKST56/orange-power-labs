@@ -72,4 +72,6 @@ page('404.html','Page not found',intro('404 / OUT OF PLAY','That page is out of 
 (OUT/'.nojekyll').touch()
 from expansion import build as expand_projects
 expand_projects(page, intro, rows, cards)
+from football_journal import build as build_football_journal
+build_football_journal(page, intro, markdown)
 print(f'Built {len(list(OUT.glob("*.html")))} pages.')

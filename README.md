@@ -13,7 +13,7 @@ Open http://localhost:8080. The built HTML also works directly from disk.
 
 The three project journals have independent numbering. Existing CBL article URLs remain `dev-log-001.html` through `dev-log-006.html`; do not rename published files. Journal indexes are `college-baseball-legacy-dev-logs.html`, `missouri-high-school-football-dev-logs.html`, and `ncaa-football-07-dev-logs.html`.
 
-Project metadata is in `content/projects.json`; added landing pages and journal gateways are generated in `expansion.py`. The NCAA Football 07 writing plan is not a publication manifest and produces no article pages. There are no published football articles yet.
+Project metadata is in `content/projects.json`; added landing pages and journal gateways are generated in `expansion.py`. The NCAA Football 07 writing plan is not a publication manifest and produces no article pages. The NCAA Football 07 journal has its first published article, generated in `football_journal.py` from `content/ncaa-football-07-dev-log-001.md`. The NCAA 14 journal has no published articles yet.
 
 To add an article, provide its project, independent number, final title, date, text, and optional image. Save the text under a project-specific content path and generate a project-specific output such as `ncaa-football-07-dev-log-001.html` or `missouri-high-school-football-dev-log-001.html`. Use the existing `page()` and `markdown()` helpers for the consistent article layout, identify the project in the heading, and add links to its own journal and adjacent entries. Update that project’s index and metadata only after the article is finalized. Rebuild, verify links, then push to deploy. Proposed articles must never be listed as published entries.
 
