@@ -4,6 +4,7 @@ ROOT = Path(__file__).parent
 ARTICLES = [
     ('001', 'From Childhood Favorite to PC Recompilation', 'PROJECT INTRODUCTION', 'A childhood favorite, original Xbox recompilation, and the long-term Missouri high school football dream.'),
     ('002', 'Cracking Open NCAA Football 07', 'EXECUTABLE RESEARCH', 'Inside the original Xbox game image: file inventory, executable sections, and imported system dependencies.'),
+    ('003', 'Mapping the Game: 33,755 Functions and Our First Major Roadblocks', 'FUNCTION AND ABI RESEARCH', 'Mapping 33,755 function candidates and identifying what needs validation before lifting can proceed.'),
 ]
 def build(page, intro, markdown):
     for index, (number, title, category, summary) in enumerate(ARTICLES):
@@ -21,8 +22,8 @@ def build(page, intro, markdown):
         path=ROOT/'site'/name
         text=path.read_text(encoding='utf-8')
         if name=='ncaa-football-07.html':
-            text=text.replace('Its development journal will document the story as articles are published.','Our first development log tells the origin story, and our second explores the original Xbox executable. <a class="text-link" href="ncaa-football-07-dev-log-002.html">Read Dev Log 002 →</a>')
+            text=text.replace('Its development journal will document the story as articles are published.','Our latest development log covers function candidates, calling conventions, and the roadblocks to lifting. <a class="text-link" href="ncaa-football-07-dev-log-003.html">Read Dev Log 003 →</a>')
             text=text.replace('</main>','<section><p class="eyebrow">NCAA FOOTBALL 07 / DEVELOPMENT JOURNAL</p><h2>The journey continues.</h2>'+listing+'</section></main>')
         else:
-            text=text.replace('</main>','<section><p class="eyebrow">NCAA FOOTBALL 07 / NEW IN THE JOURNAL</p><h2>Cracking open a childhood favorite.</h2>'+listing+'</section></main>')
+            text=text.replace('</main>','<section><p class="eyebrow">NCAA FOOTBALL 07 / NEW IN THE JOURNAL</p><h2>Mapping the game.</h2>'+listing+'</section></main>')
         path.write_text(text,encoding='utf-8')

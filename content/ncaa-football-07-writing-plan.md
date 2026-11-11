@@ -1,6 +1,6 @@
 # NCAA Football 07 journal writing plan
 
-Articles #001–#002 are now published from owner-supplied final copy. Articles #003–#004 remain proposed, unpublished entries. No article pages or publication dates are generated from this plan. The owner will supply finished articles in chat. Precise technical claims from summarized history require confirmation before inclusion.
+Articles #001–#003 are published from owner-supplied final copy. Article #004 remains proposed. No article pages or publication dates are generated from this plan. The owner will supply finished articles in chat. Precise technical claims from summarized history require confirmation before inclusion.
 
 1. **#001 — From Childhood Favorite to PC Recompilation**: use the owner’s origin story, original Xbox recompilation motivation, and long-term Missouri conversion vision.
 2. **#002 — Cracking Open NCAA Football 07**: explain game-image inventory, XBE analysis, imports, and discoveries using the finalized supplied article.
